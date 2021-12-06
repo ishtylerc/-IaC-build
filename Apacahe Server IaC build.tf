@@ -1,7 +1,7 @@
 provider "aws" {
   region = "us-east-1"
-  access_key = "AKIASAPW6S4RHALJVTG6"
-  secret_key = "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"
+  access_key = "X"
+  secret_key = "X"
 }
 
 resource "aws_subnet" "subnet-1" {
