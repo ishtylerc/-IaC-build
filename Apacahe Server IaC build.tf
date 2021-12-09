@@ -1,13 +1,29 @@
+##################################################################################################################################
+
+#The basic Syntax of Terraform is:
+
+'object': "object type" "name of object" {
+  Parameter = X
+  Parameter = Y
+  Parameter = Z 
+}
+
+##################################################################################################################################
+
+#This first block of code sets the stage for your infrastucture build outlining: The cloud providor, the region, your custom VPC and your custom subnet.
 provider "aws" {
   region = "us-east-1"
   access_key = "X"
   secret_key = "X"
 }
 
+#The CIDR Block is a very important part of your VPC. 
+#It is what will outline the size of your network. 
 resource "aws_subnet" "subnet-1" {
   vpc_id     = aws_vpc.first-vpc.id
   cidr_block = "10.0.1.0/24"
 
+#Tags act as a tool to increase organization with in you AWS cloud environment by labeling your resources. 
   tags = {
     Name = "prod-subnet"
   }
@@ -24,6 +40,7 @@ resource "aws_vpc" "first-vpc" {
 
 
 #1. Create a VPC.  
+
 resource "aws_vpc" "prod-vpc" {
   cidr_block       = "10.0.0.0/16"
   instance_tenancy = "default"
@@ -32,7 +49,9 @@ resource "aws_vpc" "prod-vpc" {
     Name = "main"
   }
 }
+
 #2. Create an Internet Gateway.
+#An internet Gateway is what connects traffic from the internet to your VPC
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.prod-vpc.id
 
